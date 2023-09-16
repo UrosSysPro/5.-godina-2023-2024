@@ -19,7 +19,11 @@ public class ArrayList {
     }
     public void add(int value){
         if(n>=niz.length){
-            //povecam niz
+            int[] novi=new int[n+1];
+            for(int i=0;i<n;i++){
+                novi[i]=niz[i];
+            }
+            niz=novi;
         }
         niz[n]=value;
         n++;
