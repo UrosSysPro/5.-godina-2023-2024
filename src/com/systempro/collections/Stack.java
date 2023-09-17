@@ -1,14 +1,14 @@
 package com.systempro.collections;
 
-public class Stack {
-    private static class Node{
-        public int value;
+public class Stack<T> {
+    private class Node{
+        public T value;
         public Node next;
-        public Node(int value, Node next){
+        public Node(T value, Node next){
             this.value=value;
             this.next=next;
         }
-        public Node(int value){
+        public Node(T value){
             this(value,null);
         }
     }
@@ -18,16 +18,18 @@ public class Stack {
     public Stack(){
         root=null;
     }
-    public void push(int i){
-
+    public void push(T value){
+        root=new Node(value,root);
     }
-    public int pop(){
-
+    public T pop(){
+        Node node=root;
+        root=node.next;
+        return node.value;
     }
-    public int peek(){
-
+    public T peek(){
+        return root.value;
     }
     public boolean isEmpty(){
-
+        return root==null;
     }
 }
