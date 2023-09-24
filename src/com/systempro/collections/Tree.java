@@ -29,4 +29,7 @@ public class Tree {
         }
         return root;
     }
+    public void print(){
+
+    }
 }
