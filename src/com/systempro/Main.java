@@ -3,11 +3,11 @@ package com.systempro;
 
 import com.systempro.collections.Queue;
 import com.systempro.collections.Stack;
+import com.systempro.lavirint.BFS;
 
 class Main{
     public static void main(String[] args) {
-        Queue<Short> queue=new Queue<>();
-        for(short i=0;i<10;i++)queue.add(i);
-        for(short i=0;i<10;i++) System.out.println(queue.remove());
+        BFS bfs=new BFS("resources/bfs/lavirint.txt");
+        bfs.print();
     }
 }
