@@ -1,13 +1,15 @@
 package com.systempro.lavirint;
 
+import com.systempro.collections.Queue;
+
 import java.io.File;
 import java.util.Scanner;
 
-public class BFS {
+public class DFS {
     private int[][] mat;
     private int width,height;
 
-    public BFS(String fileName){
+    public DFS(String fileName){
         try{
             File file=new File(fileName);
             Scanner scanner=new Scanner(file);
@@ -44,6 +46,27 @@ public class BFS {
         else if(broj<1000)  System.out.print(broj);
     }
     public void resi(int x,int y){
-
+        mat[x][y]=0;
+        Queue<Point> stack=new Queue<>();
+        stack.add(new Point(x,y));
+        while (!stack.isEmpty()){
+            Point p=stack.remove();
+            if(p.x-1>=0&&p.x-1<width&&mat[p.x-1][p.y]==-1){
+                stack.add(new Point(p.x-1,p.y));
+                mat[p.x-1][p.y]=mat[p.x][p.y]+1;
+            }
+            if(p.x+1>=0&&p.x+1<width&&mat[p.x+1][p.y]==-1) {
+                stack.add(new Point(p.x+1,p.y));
+                mat[p.x+1][p.y]=mat[p.x][p.y]+1;
+            }
+            if(p.y-1>=0&&p.y-1<height&&mat[p.x][p.y-1]==-1){
+                stack.add(new Point(p.x,p.y-1));
+                mat[p.x][p.y-1]=mat[p.x][p.y]+1;
+            }
+            if(p.y+1>=0&&p.y+1<height&&mat[p.x][p.y+1]==-1) {
+                stack.add(new Point(p.x,p.y+1));
+                mat[p.x][p.y+1]=mat[p.x][p.y]+1;
+            }
+        }
     }
 }

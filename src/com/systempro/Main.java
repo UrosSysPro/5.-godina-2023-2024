@@ -1,13 +1,12 @@
 package com.systempro;
 
 
-import com.systempro.collections.Queue;
-import com.systempro.collections.Stack;
-import com.systempro.lavirint.BFS;
+import com.systempro.lavirint.DFS;
 
 class Main{
     public static void main(String[] args) {
-        BFS bfs=new BFS("resources/bfs/lavirint.txt");
-        bfs.print();
+        DFS dfs=new DFS("resources/bfs/lavirint.txt");
+        dfs.resi(13,0);
+        dfs.print();
     }
 }
