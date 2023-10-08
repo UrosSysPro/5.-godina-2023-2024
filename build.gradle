@@ -21,6 +21,12 @@ sourceSets {
     }
 }
 
+
+repositories {
+    mavenCentral()
+}
+
+
 dependencies {
 
 }
