@@ -1,9 +1,12 @@
 package com.systempro.lavirint;
 
 import com.systempro.collections.Queue;
+import com.systempro.collections.Stack;
 
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class DFS {
@@ -31,6 +34,16 @@ public class DFS {
             e.printStackTrace();
         }
     }
+    public DFS(int width,int height){
+        mat=new int[width][height];
+        this.width=width;
+        this.height=height;
+        for(int i=0;i<width;i++){
+            for(int j=0;j<height;j++){
+                mat[i][j]=-1;
+            }
+        }
+    }
     public void print(){
         for(int j=0;j<height;j++){
             for(int i=0;i<width;i++){
@@ -47,6 +60,11 @@ public class DFS {
         else if(broj<1000)  System.out.print(broj);
     }
     public void resi(int x,int y){
+        for(int i=0;i<width;i++){
+            for(int j=0;j<height;j++){
+                if(mat[i][j]!=-2)mat[i][j]=-1;
+            }
+        }
         mat[x][y]=0;
         Queue<Point> stack=new Queue<>();
         stack.add(new Point(x,y));
@@ -71,10 +89,46 @@ public class DFS {
         }
     }
 
-    public void draw(Graphics graphics){
+    public void regenerate(){
+        for(int i=0;i<width;i++){
+            for(int j=0;j<height;j++){
+                mat[i][j]=-2;
+            }
+        }
+        Stack<Point> stack=new Stack<>();
+        stack.push(new Point(0,0));
+        Random random=new Random();
+        while(!stack.isEmpty()){
+            Point p=stack.peek();
+            if(p.x<0||p.y<0||p.x>=width||p.y>=height)continue;
+//            if(mat[p.x][p.y]==-1)continue;
+            mat[p.x][p.y]=-1;
+            ArrayList<Point> list=new ArrayList<>();
+            if(p.x-2>=0 && mat[p.x-2][p.y]==-2)list.add(new Point(p.x-2,p.y));
+            if(p.x+2<width && mat[p.x+2][p.y]==-2)list.add(new Point(p.x+2,p.y));
+            if(p.y-2>=0 && mat[p.x][p.y-2]==-2)list.add(new Point(p.x,p.y-2));
+            if(p.y+2<height && mat[p.x][p.y+2]==-2)list.add(new Point(p.x,p.y+2));
+            if(list.isEmpty()){
+                stack.pop();
+                continue;
+            }
+            for(int i=0;i<list.size();i++){
+                int j= random.nextInt(list.size());
+                Point t=list.get(i);
+                list.set(i,list.get(j));
+                list.set(j,t);
+            }
+            Point p1=list.get(0);
+//            mat[p1.x][p1.y]=-1;
+            mat[(p.x+p1.x)/2][(p.y+p1.y)/2]=-1;
+            stack.push(p1);
+        }
+    }
+
+    public void draw(Graphics graphics,int cellSize){
         Color start=Color.BLUE;
         Color end=Color.ORANGE;
-        int cellSize=50;
+
         int max=-2;
         for(int i=0;i<width;i++){
             for(int j=0;j<height;j++) {
@@ -85,11 +139,11 @@ public class DFS {
             for(int j=0;j<height;j++){
                 if(mat[i][j]==-2){
                     graphics.setColor(Color.BLACK);
-                    graphics.fillRect(i*cellSize,j*cellSize+50,cellSize,cellSize);
+                    graphics.fillRect(i*cellSize,j*cellSize,cellSize,cellSize);
                 }
                 if(mat[i][j]==-1){
                     graphics.setColor(Color.WHITE);
-                    graphics.fillRect(i*cellSize,j*cellSize+50,cellSize,cellSize);
+                    graphics.fillRect(i*cellSize,j*cellSize,cellSize,cellSize);
                 }
                 if(mat[i][j]!=-2 && mat[i][j]!=-1){
                     float alfa=(float)mat[i][j]/(float)max;
@@ -100,7 +154,7 @@ public class DFS {
                         (int)(start.getBlue()*alfa+end.getBlue()*(1-alfa))
                     );
                     graphics.setColor(color);
-                    graphics.fillRect(i*cellSize,j*cellSize+50,cellSize,cellSize);
+                    graphics.fillRect(i*cellSize,j*cellSize,cellSize,cellSize);
                 }
             }
         }
