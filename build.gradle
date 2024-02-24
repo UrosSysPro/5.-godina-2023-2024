@@ -9,7 +9,9 @@ plugins{
     id 'java'
 }
 
-
+run {
+    standardInput = System.in
+}
 application{
     mainClass = 'com.systempro.Main'
 }
@@ -28,5 +30,7 @@ repositories {
 
 
 dependencies {
-
+    implementation 'com.github.kurbatov:firmata4j:2.3.8'
+    implementation 'org.slf4j:slf4j-nop:2.1.0-alpha1'
+//    implementation 'org.apache.directory.studio:org.slf4j.api:1.6.1'
 }
