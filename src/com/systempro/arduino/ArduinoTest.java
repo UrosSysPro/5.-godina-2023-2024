@@ -1,8 +1,11 @@
 package com.systempro.arduino;
 
+import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import org.firmata4j.IODevice;
 import org.firmata4j.IODeviceEventListener;
@@ -10,43 +13,65 @@ import org.firmata4j.IOEvent;
 import org.firmata4j.Pin;
 import org.firmata4j.firmata.FirmataDevice;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 public class ArduinoTest implements IODeviceEventListener{
     public Screen screen;
-    public int button1=2,button2=3;
-
+    public TextGraphics graphics;
+    public IODevice device;
+    public Button button1,button2;
+    public boolean exit;
     public void run(){
-        try {
+        try{
             screen=new DefaultTerminalFactory().createScreen();
-            System.out.println();
+            graphics=screen.newTextGraphics();
             screen.startScreen();
-            IODevice device = new FirmataDevice("/dev/ttyUSB0");
+            device = new FirmataDevice("/dev/ttyACM0");
             device.addEventListener(this);
             device.ensureInitializationIsDone();
 
-//            Pin pin1=device.getPin(button1);
-//            Pin pin2=device.getPin(button2);
-//            pin1.setMode(Pin.Mode.INPUT);
-//            pin2.setMode(Pin.Mode.INPUT);
 
-            boolean exit=false;
+            button1=new Button(device.getPin(7), KeyEvent.VK_I);
+            button1.pin.setMode(Pin.Mode.INPUT);
+
+            exit=false;
             while (!exit){
-                KeyStroke keyStroke;
-                while((keyStroke=screen.pollInput())!=null){
-                    if(keyStroke.getKeyType()== KeyType.Character){
-                        char c=keyStroke.getCharacter();
-                        if(c=='q'){
-                            exit=true;
-                        }
-                    }
-                }
+                input();
+                update();
+                draw();
                 Thread.sleep(16);
             }
 
             screen.stopScreen();
             device.stop();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void input(){
+        try {
+            KeyStroke keyStroke;
+            while((keyStroke=screen.pollInput())!=null){
+                if(keyStroke.getKeyType()== KeyType.Character){
+                    char c=keyStroke.getCharacter();
+                    if(c=='q'){
+                        exit=true;
+                    }
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void update(){
+        button1.update();
+    }
+    public void draw(){
+        try {
+            graphics.putString(0,0,"button 1: "+button1.down);
+            screen.refresh();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -61,39 +86,13 @@ public class ArduinoTest implements IODeviceEventListener{
     }
     @Override
     public void onPinChange(IOEvent event) {
+        if(button1==null)return;
+
         Pin pin = event.getPin();
         long value= pin.getValue();
         int index=pin.getIndex();
-        if(index==8){
-            System.out.println(
-                String.format(
-                    "Pin %d got a value of %d",
-                    pin.getIndex(),
-                    pin.getValue())
-            );
-        }
-        if(index==button1&&value==1){
-            try{
-                Robot robot=new Robot();
-                robot.keyPress(KeyEvent.VK_I);
-                robot.keyRelease(KeyEvent.VK_I);
-            }catch (Exception e){
-                System.out.println("robot error");
-                e.printStackTrace();
-            }
-            System.out.println("pin 0 value:"+value);
-        }
-        if(index==button2&&value==1){
-            try{
-                Robot robot=new Robot();
-                robot.keyPress(KeyEvent.VK_K);
-                robot.keyRelease(KeyEvent.VK_K);
-            }catch (Exception e){
-                System.out.println("robot error");
-                e.printStackTrace();
-            }
-            System.out.println("pin 0 value:"+value);
-        }
+
+        if(index==button1.pin.getIndex())button1.change(value);
     }
     @Override
     public void onMessageReceive(IOEvent event, String message) {
