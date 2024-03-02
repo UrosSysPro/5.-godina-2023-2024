@@ -9,26 +9,31 @@ public class Button {
     public Pin pin;
     public boolean down;
     public int key;
-    public Button(Pin pin,int key){
+    public String name;
+    public Button(Pin pin,int key,String name){
+        this.name=name;
         this.key=key;
         this.pin=pin;
         down=false;
-    }
-    public void change(long value){
-        down= value != 0;
-    }
-    public void update(){
-        Robot robot;
         try{
-            robot=new Robot();
+            pin.setMode(Pin.Mode.INPUT);
         }catch (Exception e){
             e.printStackTrace();
-            return;
         }
-        if (down){
-            robot.keyPress(key);
-        }else{
-            robot.keyRelease(key);
+    }
+    public void change(long value){
+        down= value == 1;
+    }
+    public void update(){
+        try{
+            Robot robot=new Robot();
+            if (down){
+                robot.keyPress(key);
+            }else{
+                robot.keyRelease(key);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }

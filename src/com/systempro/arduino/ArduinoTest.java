@@ -20,20 +20,24 @@ public class ArduinoTest implements IODeviceEventListener{
     public Screen screen;
     public TextGraphics graphics;
     public IODevice device;
-    public Button button1,button2;
+//    public Button button1,button2;
+    public Button[] buttons;
     public boolean exit;
     public void run(){
         try{
             screen=new DefaultTerminalFactory().createScreen();
             graphics=screen.newTextGraphics();
             screen.startScreen();
-            device = new FirmataDevice("/dev/ttyACM0");
+            device = new FirmataDevice("/dev/ttyUSB0");
             device.addEventListener(this);
             device.ensureInitializationIsDone();
 
 
-            button1=new Button(device.getPin(7), KeyEvent.VK_I);
-            button1.pin.setMode(Pin.Mode.INPUT);
+            buttons=new Button[]{
+                new Button(device.getPin(2), KeyEvent.VK_D,"key D"),
+                new Button(device.getPin(4), KeyEvent.VK_W,"key W"),
+                new Button(device.getPin(6), KeyEvent.VK_A,"key A"),
+            };
 
             exit=false;
             while (!exit){
@@ -66,11 +70,13 @@ public class ArduinoTest implements IODeviceEventListener{
         }
     }
     public void update(){
-        button1.update();
+        for(Button button:buttons)button.update();
     }
     public void draw(){
         try {
-            graphics.putString(0,0,"button 1: "+button1.down);
+            for(int i=0;i<buttons.length;i++){
+                graphics.putString(0,i,buttons[i].name+": "+buttons[i].down);
+            }
             screen.refresh();
         }catch (Exception e){
             e.printStackTrace();
@@ -86,13 +92,13 @@ public class ArduinoTest implements IODeviceEventListener{
     }
     @Override
     public void onPinChange(IOEvent event) {
-        if(button1==null)return;
+        if(buttons==null)return;
 
         Pin pin = event.getPin();
         long value= pin.getValue();
         int index=pin.getIndex();
 
-        if(index==button1.pin.getIndex())button1.change(value);
+        for(Button button:buttons) if(index==button.pin.getIndex())button.change(value);
     }
     @Override
     public void onMessageReceive(IOEvent event, String message) {
