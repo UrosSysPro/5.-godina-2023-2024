@@ -22,6 +22,7 @@ public class ArduinoTest implements IODeviceEventListener{
     public IODevice device;
 //    public Button button1,button2;
     public Button[] buttons;
+    public Pin analogIn;
     public boolean exit;
     public void run(){
         try{
@@ -38,6 +39,8 @@ public class ArduinoTest implements IODeviceEventListener{
                 new Button(device.getPin(4), KeyEvent.VK_W,"key W"),
                 new Button(device.getPin(6), KeyEvent.VK_A,"key A"),
             };
+            analogIn=device.getPin(14);
+            analogIn.setMode(Pin.Mode.ANALOG);
 
             exit=false;
             while (!exit){
@@ -77,6 +80,9 @@ public class ArduinoTest implements IODeviceEventListener{
             for(int i=0;i<buttons.length;i++){
                 graphics.putString(0,i,buttons[i].name+": "+buttons[i].down);
             }
+            long value=analogIn.getValue();
+            graphics.putString(0,buttons.length,"analog pin:"+String.format("%5d",value));
+
             screen.refresh();
         }catch (Exception e){
             e.printStackTrace();
