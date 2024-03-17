@@ -56,7 +56,6 @@ public class ArduinoTest implements IODeviceEventListener{
             e.printStackTrace();
         }
     }
-
     public void input(){
         try {
             KeyStroke keyStroke;
