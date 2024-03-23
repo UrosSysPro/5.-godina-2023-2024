@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/mani_page.dart';
 
 void main(){
-  runApp(App());
+  runApp(MainPage());
 }
 
 
