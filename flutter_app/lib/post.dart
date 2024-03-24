@@ -6,6 +6,7 @@ class Post extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
@@ -75,7 +76,23 @@ class Post extends StatelessWidget {
               ],
             ),
           ),
-        )
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: Text("Liked by User Name and 1,203,123 others"),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: Text("Description Description Description Description "),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: Text("View all 808 coments",style: TextStyle(
+            color: Colors.grey,
+            fontSize: 12
+          ),),
+        ),
+        SizedBox(height: 10,)
       ],
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/home_view.dart';
+import 'package:flutter_app/search_view.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -26,6 +27,7 @@ class _MainPageState extends State<MainPage> {
         body: Builder(builder: (context){
           switch(selectedPage){
             case 0:return HomeView();
+            case 1:return SearchView();
             default:return Container();
           }
         },),
