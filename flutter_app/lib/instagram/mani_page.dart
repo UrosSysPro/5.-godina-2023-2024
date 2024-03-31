@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/home_view.dart';
-import 'package:flutter_app/search_view.dart';
+import 'package:flutter_app/instagram/home_view.dart';
+import 'package:flutter_app/instagram/search_view.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/post.dart';
-import 'package:flutter_app/stories.dart';
+import 'package:flutter_app/instagram/post.dart';
+import 'package:flutter_app/instagram/stories.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
