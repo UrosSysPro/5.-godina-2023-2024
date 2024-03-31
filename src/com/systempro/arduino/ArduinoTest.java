@@ -12,16 +12,10 @@ import org.firmata4j.IODeviceEventListener;
 import org.firmata4j.IOEvent;
 import org.firmata4j.Pin;
 import org.firmata4j.firmata.FirmataDevice;
-
-import java.awt.event.KeyEvent;
-import java.io.IOException;
-
 public class ArduinoTest implements IODeviceEventListener{
     public Screen screen;
     public TextGraphics graphics;
     public IODevice device;
-//    public Button button1,button2;
-    public Button[] buttons;
     public Pin analogIn;
     public boolean exit;
     public void run(){
@@ -33,14 +27,9 @@ public class ArduinoTest implements IODeviceEventListener{
             device.addEventListener(this);
             device.ensureInitializationIsDone();
 
-
-            buttons=new Button[]{
-                new Button(device.getPin(2), KeyEvent.VK_D,"key D"),
-                new Button(device.getPin(4), KeyEvent.VK_W,"key W"),
-                new Button(device.getPin(6), KeyEvent.VK_A,"key A"),
-            };
             analogIn=device.getPin(14);
             analogIn.setMode(Pin.Mode.ANALOG);
+
 
             exit=false;
             while (!exit){
@@ -72,16 +61,12 @@ public class ArduinoTest implements IODeviceEventListener{
         }
     }
     public void update(){
-        for(Button button:buttons)button.update();
+
     }
     public void draw(){
         try {
-            for(int i=0;i<buttons.length;i++){
-                graphics.putString(0,i,buttons[i].name+": "+buttons[i].down);
-            }
-            long value=analogIn.getValue();
-            graphics.putString(0,buttons.length,"analog pin:"+String.format("%5d",value));
-
+            screen.clear();
+            graphics.putString(0,0,String.format("pin 14: %4d",analogIn.getValue()));
             screen.refresh();
         }catch (Exception e){
             e.printStackTrace();
@@ -97,13 +82,10 @@ public class ArduinoTest implements IODeviceEventListener{
     }
     @Override
     public void onPinChange(IOEvent event) {
-        if(buttons==null)return;
 
         Pin pin = event.getPin();
         long value= pin.getValue();
         int index=pin.getIndex();
-
-        for(Button button:buttons) if(index==button.pin.getIndex())button.change(value);
     }
     @Override
     public void onMessageReceive(IOEvent event, String message) {
