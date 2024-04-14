@@ -12,6 +12,7 @@ class Utils{
   }
 }
 enum SearchType{
+  user(value:"user"),
   track(value:"track");
   const SearchType({required this.value});
   final String value;
