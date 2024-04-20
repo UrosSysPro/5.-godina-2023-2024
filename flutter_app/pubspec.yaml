@@ -38,6 +38,7 @@ dependencies:
   http: ^1.2.1
   just_audio: ^0.9.37
   sensors_plus: ^4.0.1
+  audio_waveforms: ^1.0.5
 
 dev_dependencies:
   flutter_test:

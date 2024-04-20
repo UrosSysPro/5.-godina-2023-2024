@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/sensors/app.dart';
+import 'package:flutter_app/dopler_effect/app.dart';
 
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
