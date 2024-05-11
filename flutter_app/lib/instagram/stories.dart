@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Stories extends StatelessWidget {
+  const Stories({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -16,12 +18,12 @@ class Stories extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.all(3),
+                    padding: const EdgeInsets.all(3),
                     width: 80,height: 80,
                     decoration: BoxDecoration(
                       // color: Colors.red,
                       borderRadius: BorderRadius.circular(100),
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         colors: [
                           Color(0xffF0BE57),
                           Color(0xffE13A45),
@@ -39,7 +41,7 @@ class Stories extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Text("User name")
+                  const Text("User name")
                 ],
               ),
             ),

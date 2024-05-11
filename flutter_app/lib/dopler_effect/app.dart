@@ -1,9 +1,7 @@
 import 'dart:math';
 
 import 'package:audio_waveforms/audio_waveforms.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -44,9 +42,9 @@ class _AppState extends State<App> {
           children: [
             Expanded(
               child: AudioWaveforms(
-                size: Size(300, 200.0),
+                size: const Size(300, 200.0),
                 recorderController: controller,
-                waveStyle: WaveStyle(
+                waveStyle: const WaveStyle(
                   waveColor: Colors.white,
                   showDurationLabel: true,
                   spacing: 8.0,
@@ -64,7 +62,7 @@ class _AppState extends State<App> {
                       stream: controller.onCurrentDuration,
                       builder: (context, snapshot) {
                         if(!snapshot.hasData||snapshot.data==null){
-                          return Center(
+                          return const Center(
                             child: Text("no data"),
                           );
                         }else{
@@ -87,7 +85,9 @@ class _AppState extends State<App> {
                           children: [
                             IconButton(
                               onPressed: (){
-                                if(!paused)controller.pause(); else {
+                                if(!paused) {
+                                  controller.pause();
+                                } else {
                                   controller.reset();
                                   controller.refresh();
                                   controller.record();

@@ -17,11 +17,11 @@ class Post extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children:[
                   Container(
-                    padding: EdgeInsets.all(3),
+                    padding: const EdgeInsets.all(3),
                     width: 50,height: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                           colors: [
                             Color(0xffF0BE57),
                             Color(0xffE13A45),
@@ -38,9 +38,9 @@ class Post extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Expanded(
+                  const Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      padding: EdgeInsets.symmetric(horizontal: 5),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -52,7 +52,7 @@ class Post extends StatelessWidget {
                       ),
                     ),
                   ),
-                  IconButton(onPressed: (){}, icon: Icon(Icons.more_vert))
+                  IconButton(onPressed: (){}, icon: const Icon(Icons.more_vert))
                 ]
             ),
           ),
@@ -67,32 +67,32 @@ class Post extends StatelessWidget {
             height: 60,
             child: Row(
               children: [
-                IconButton(onPressed: (){}, icon: Icon(Icons.favorite_outline)),
-                IconButton(onPressed: (){}, icon: Icon(Icons.chat_bubble_outline)),
-                IconButton(onPressed: (){}, icon: Icon(Icons.send)),
-                Expanded(child: Align(alignment: Alignment.centerRight,child: Icon(
+                IconButton(onPressed: (){}, icon: const Icon(Icons.favorite_outline)),
+                IconButton(onPressed: (){}, icon: const Icon(Icons.chat_bubble_outline)),
+                IconButton(onPressed: (){}, icon: const Icon(Icons.send)),
+                const Expanded(child: Align(alignment: Alignment.centerRight,child: Icon(
                   Icons.bookmark_outline
                 ),))
               ],
             ),
           ),
         ),
-        Padding(
+        const Padding(
           padding: EdgeInsets.symmetric(horizontal: 8),
           child: Text("Liked by User Name and 1,203,123 others"),
         ),
-        Padding(
+        const Padding(
           padding: EdgeInsets.symmetric(horizontal: 8),
           child: Text("Description Description Description Description "),
         ),
-        Padding(
+        const Padding(
           padding: EdgeInsets.symmetric(horizontal: 8),
           child: Text("View all 808 coments",style: TextStyle(
             color: Colors.grey,
             fontSize: 12
           ),),
         ),
-        SizedBox(height: 10,)
+        const SizedBox(height: 10,)
       ],
     );
   }

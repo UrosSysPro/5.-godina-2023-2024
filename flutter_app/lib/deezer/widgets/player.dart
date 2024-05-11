@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -35,7 +34,7 @@ class _PlayerState extends State<Player> {
             children: [
               IconButton(
                   onPressed: (){},
-                  icon: Icon(Icons.fast_rewind)
+                  icon: const Icon(Icons.fast_rewind)
               ),
               IconButton(
                   onPressed: (){
@@ -50,7 +49,7 @@ class _PlayerState extends State<Player> {
               ),
               IconButton(
                   onPressed: (){},
-                  icon: Icon(Icons.fast_forward)
+                  icon: const Icon(Icons.fast_forward)
               ),
             ],
           ),

@@ -24,13 +24,13 @@ class AppState extends State<App> {
       title: '',
         home: Scaffold(
           body:Builder(builder: (context){
-            if(currentPage==0)return TrackPage();
+            if(currentPage==0)return const TrackPage();
             return Container();
           }),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: currentPage,
             onTap: (index)=>setState(()=>currentPage=index),
-            items: [
+            items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: "Home"

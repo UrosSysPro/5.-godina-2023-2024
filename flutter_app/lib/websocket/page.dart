@@ -13,21 +13,21 @@ class _PageState extends State<Page> {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         leading: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             CupertinoButton(
               onPressed: (){
                 Navigator.pop(context);
               },
-              child: Icon(CupertinoIcons.back),
+              child: const Icon(CupertinoIcons.back),
             ),
-            Text('AppBar')
+            const Text('AppBar')
           ],
-          mainAxisSize: MainAxisSize.min,
         ),
-        middle: Text('Page'),
+        middle: const Text('Page'),
       ),
       child: ListView(
-        children: [],
+        children: const [],
       ),
     );
   }

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/deezer/models/track.dart';
 import 'package:flutter_app/deezer/utils.dart';
@@ -39,10 +38,10 @@ class _TrackPageState extends State<TrackPage> {
                   SliverAppBar(
                     pinned: true,
                     leading: IconButton(
-                      icon: Icon(Icons.search),
+                      icon: const Icon(Icons.search),
                       onPressed: (){},
                     ),
-                    title: Text("Text"),
+                    title: const Text("Text"),
                   ),
                   SliverList.builder(
                     itemCount: list.length,

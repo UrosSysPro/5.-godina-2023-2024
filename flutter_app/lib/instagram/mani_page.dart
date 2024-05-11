@@ -26,8 +26,8 @@ class _MainPageState extends State<MainPage> {
       home: Scaffold(
         body: Builder(builder: (context){
           switch(selectedPage){
-            case 0:return HomeView();
-            case 1:return SearchView();
+            case 0:return const HomeView();
+            case 1:return const SearchView();
             default:return Container();
           }
         },),
@@ -49,32 +49,32 @@ class _MainPageState extends State<MainPage> {
               items: [
                 BottomNavigationBarItem(
                   icon: selectedPage==0?
-                    Icon(Icons.home):
-                    Icon(Icons.home_outlined),
+                    const Icon(Icons.home):
+                    const Icon(Icons.home_outlined),
                   label: "home"
                 ),
                 BottomNavigationBarItem(
                     icon: selectedPage==1?
-                      Icon(Icons.search):
-                      Icon(Icons.search_outlined),
+                      const Icon(Icons.search):
+                      const Icon(Icons.search_outlined),
                     label: "search"
                 ),
                 BottomNavigationBarItem(
                     icon: selectedPage!=2?
-                      Icon(Icons.add_box_outlined):
-                      Icon(Icons.add_box),
+                      const Icon(Icons.add_box_outlined):
+                      const Icon(Icons.add_box),
                     label: "add"
                 ),
                 BottomNavigationBarItem(
                     icon: selectedPage==3?
-                      Icon(Icons.play_circle):
-                      Icon(Icons.play_circle_outline),
+                      const Icon(Icons.play_circle):
+                      const Icon(Icons.play_circle_outline),
                     label: "reels"
                 ),
                 BottomNavigationBarItem(
                     icon: selectedPage==4?
-                      Icon(Icons.person):
-                      Icon(Icons.person_outline),
+                      const Icon(Icons.person):
+                      const Icon(Icons.person_outline),
                     label: "about"
                 ),
               ],

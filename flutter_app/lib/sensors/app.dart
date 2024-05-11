@@ -21,9 +21,9 @@ class _AppState extends State<App> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          leading: IconButton(onPressed: (){},icon: Icon(Icons.menu),),
-          title: Text("AppBar"),
-          actions: [],
+          leading: IconButton(onPressed: (){},icon: const Icon(Icons.menu),),
+          title: const Text("AppBar"),
+          actions: const [],
         ),
         body: Center(
           child: Column(
@@ -38,7 +38,7 @@ class _AppState extends State<App> {
                           'z:${snapshot.data?.z.toStringAsFixed(3)}'
                     );
                   }else{
-                    return Text("no accelerometer data");
+                    return const Text("no accelerometer data");
                   }
                 },
               ),
@@ -53,7 +53,7 @@ class _AppState extends State<App> {
                       'z: ${d.z.toStringAsFixed(3)}'
                     );
                   }else{
-                    return Text('no gyroscope data');
+                    return const Text('no gyroscope data');
                   }
                 },
               ),
@@ -68,7 +68,7 @@ class _AppState extends State<App> {
                             'z: ${d.z.toStringAsFixed(3)}'
                     );
                   }else{
-                    return Text('no magnetometer data');
+                    return const Text('no magnetometer data');
                   }
                 },
               ),

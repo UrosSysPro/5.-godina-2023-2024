@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class SearchView extends StatefulWidget {
+  const SearchView({super.key});
+
 
   @override
   State<SearchView> createState() => _SearchViewState();
@@ -32,7 +34,7 @@ class _SearchViewState extends State<SearchView> {
       Colors.black54,
       Colors.black87,
     ];
-    var r=new Random();
+    var r=Random();
     colors=List.generate(3, (index) =>
       List.generate(10,(index)=>
         list[r.nextInt(list.length)
@@ -44,17 +46,17 @@ class _SearchViewState extends State<SearchView> {
     return ListView(
       children: [
         Container(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           color: Theme.of(context).colorScheme.background,
           child: Container(
               decoration: BoxDecoration(
-                  color: new Color(0xff252525),
+                  color: const Color(0xff252525),
                   borderRadius: BorderRadius.circular(10)
               ),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 height: 40,
-                child: Row(
+                child: const Row(
                   children: [
                     Icon(Icons.search),
                     SizedBox(width: 4,),

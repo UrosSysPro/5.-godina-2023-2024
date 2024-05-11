@@ -7,7 +7,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
 class MyApp extends StatelessWidget {
@@ -75,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
               decoration: BoxDecoration(
                 border: Border.all(width: 1.0, color: Colors.black38),
               ),
-              child: SizedBox(
+              child: const SizedBox(
                 height: _snakeRows * _snakeCellSize,
                 width: _snakeColumns * _snakeCellSize,
                 // child: Snake(

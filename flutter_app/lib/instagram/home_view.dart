@@ -9,22 +9,22 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Logo"),
+        title: const Text("Logo"),
         actions: [
           IconButton(
             onPressed: (){},
-            icon: Icon(Icons.heart_broken),
+            icon: const Icon(Icons.heart_broken),
           ),
           IconButton(
             onPressed: (){},
-            icon: Icon(Icons.chat),
+            icon: const Icon(Icons.chat),
           )
         ],
       ),
       body: ListView(
         children: [
-          Stories(),
-          ...List.generate(10, (index) => Post()).toList()
+          const Stories(),
+          ...List.generate(10, (index) => const Post()).toList()
         ],
       ),
     );
