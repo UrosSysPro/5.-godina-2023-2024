@@ -41,8 +41,13 @@ class _AppState extends State<App> {
           future: loader,
           builder: (context,snapshot) {
             if(snapshot.hasData) {
-              return CustomPaint(
-                painter: ShaderPainter(shader),
+              return Container(
+                width: double.infinity,
+                height: double.infinity,
+                color: Colors.deepPurple,
+                child: CustomPaint(
+                  painter: ShaderPainter(shader),
+                ),
               );
             }
             else{
@@ -74,15 +79,17 @@ class ShaderPainter extends CustomPainter{
 
   @override
   void paint(Canvas canvas, Size size) {
-    // shader.fragmentShader().setFloat(0,size.width);
-    // shader.fragmentShader().setFloat(1,size.height);
-
-    // var rect=Rect.fromLTWH(0,0,size.width,size.height);
-    print(size.width);
+    var fragment=shader.fragmentShader();
+    fragment.setFloat(0, 1.0);
+    fragment.setFloat(1, .0);
+    fragment.setFloat(2, .0);
+    fragment.setFloat(3, 1);
+    fragment.setFloat(4, size.width);
+    fragment.setFloat(5, size.height);
     var rect=Rect.fromLTWH(0,0,size.width,size.height);
     var paint=Paint()
     ..color=Colors.green
-    // ..shader=shader.fragmentShader()
+    ..shader=fragment
     ;
 
     canvas.drawRect(rect,paint);
@@ -90,6 +97,6 @@ class ShaderPainter extends CustomPainter{
 
   @override
   bool shouldRepaint(ShaderPainter oldDelegate) {
-    return false;
+    return true;
   }
 }
