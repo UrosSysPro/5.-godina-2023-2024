@@ -13,6 +13,9 @@ float circle(vec2 p,float r){
 vec2 translate(vec2 p,vec2 t){
     return p-t;
 }
+vec3 translate(vec3 p,vec3 t){
+    return p-t;
+}
 float unionSdf(float d1,float d2){
     return min(d1,d2);
 }
@@ -25,6 +28,11 @@ float subtract(float d1,float d2){
 float box(vec2 p,vec2 b ){
     vec2 d = abs(p)-b;
     return length(max(d,0.0)) + min(max(d.x,d.y),0.0);
+}
+
+float sdSphere( vec3 p, float s )
+{
+    return length(p)-s;
 }
 
 #define PI 3.1415926535
@@ -54,11 +62,12 @@ float rayMarch(vec2 start,vec2 target){
     vec2 rd=normalize(target-start);
     float initial=distance(start,target);
     float d=0;
-    for(int i=0;i<100;i++){
+    for(int i=0;i<750;i++){
         vec2 p=ro+rd*d;
-        float sdf=shape(p);
+        float min=shape(p);
+        float sdf=min;
         d+=sdf;
-        if(d>initial)break;
+        if(d>initial||min<0.001)break;
     }
     return d;
 }
