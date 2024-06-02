@@ -16,20 +16,24 @@ public class ArduinoTest implements IODeviceEventListener{
     public Screen screen;
     public TextGraphics graphics;
     public IODevice device;
-    public Pin analogIn;
+    public Pin analog1,analog2,analog3;
     public boolean exit;
     public void run(){
         try{
             screen=new DefaultTerminalFactory().createScreen();
             graphics=screen.newTextGraphics();
             screen.startScreen();
-            device = new FirmataDevice("/dev/ttyUSB0");
+            device = new FirmataDevice("/dev/ttyACM0");
             device.addEventListener(this);
             device.ensureInitializationIsDone();
 
-            analogIn=device.getPin(14);
-            analogIn.setMode(Pin.Mode.ANALOG);
 
+            analog1=device.getPin(19);
+            analog1.setMode(Pin.Mode.ANALOG);
+            analog2=device.getPin(20);
+            analog2.setMode(Pin.Mode.ANALOG);
+            analog3=device.getPin(21);
+            analog3.setMode(Pin.Mode.ANALOG);
 
             exit=false;
             while (!exit){
@@ -66,7 +70,9 @@ public class ArduinoTest implements IODeviceEventListener{
     public void draw(){
         try {
             screen.clear();
-            graphics.putString(0,0,String.format("pin 14: %4d",analogIn.getValue()));
+            graphics.putString(0,0,String.format("pin1: %4d",analog1.getValue()));
+            graphics.putString(0,1,String.format("pin2: %4d",analog2.getValue()));
+            graphics.putString(0,2,String.format("pin3: %4d",analog3.getValue()));
             screen.refresh();
         }catch (Exception e){
             e.printStackTrace();
