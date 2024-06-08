@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/shaders/gradient/app.dart';
+import 'package:flutter_app/firebase/app.dart';
 
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
