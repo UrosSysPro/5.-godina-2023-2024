@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/firebase/home.dart';
+import 'package:flutter_app/firebase/login.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -8,6 +11,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  var auth=FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,10 +21,16 @@ class _AppState extends State<App> {
           brightness: Brightness.dark
         )
       ),
-      home: Scaffold(
-        body: Center(
-          child: Text("hello"),
-        ),
+      home: StreamBuilder(
+        stream: auth.authStateChanges(),
+        builder: (context, snapshot) {
+          var user=snapshot.data;
+          if(snapshot.hasData&&user!=null){
+            return Home(user:user);
+          }else{
+            return const Login();
+          }
+        }
       ),
     );
   }
